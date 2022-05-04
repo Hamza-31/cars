@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<div class="row mt-5">
+    {% for car in cars %}
+
+        <div class="col card text-white bg-primary m-3" style="max-width: 20rem;">
+            <a class="text-white text-decoration-none" href="{{ path('tab', {'id': car.id}) }}">
+            <div class="card-header">{{ car.title }}</div>
+            <div class="card-body">
+                <h4 class="card-title">{{ car.model }}</h4>
+                <p class="card-text">{{ car.description }}</p>
+                <p class="card-text">Release Year : {{ car.releaseYear|date('d/M/Y') }}</p>
+                <p class="card-text">Fuel : {{ car.fuel }}</p>
+                {% if car.drivingLicense==true %}
+                    <p>With driving license</p>
+                    {% else %}
+                    <p>Without driving license</p>
+                {% endif %}
+            </div>
+        </a>
+        </div>
+
+    {% endfor %}
+</div>
+    <div><a class="btn btn-info" href="{{ path('app_cars_new') }}">Create new</a></div>
+{% endblock %}

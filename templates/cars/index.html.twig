@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cars index{% endblock %}
+
+{% block body %}
+    <h1>Cars index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Model</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>ReleaseYear</th>
+                <th>Mileage</th>
+                <th>Fuel</th>
+                <th>DrivingLicense</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for car in cars %}
+            <tr>
+                <td>{{ car.id }}</td>
+                <td>{{ car.title }}</td>
+                <td>{{ car.description }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.brand }}</td>
+                <td>{{ car.price }}</td>
+                <td>{{ car.releaseYear ? car.releaseYear|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ car.mileage }}</td>
+                <td>{{ car.fuel }}</td>
+                <td>{{ car.drivingLicense ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_cars_show', {'id': car.id}) }}">show</a>
+                    {% if app.user  %}
+                    <a href="{{ path('app_cars_edit', {'id': car.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cars_new') }}">Create new</a>
+{% endblock %}

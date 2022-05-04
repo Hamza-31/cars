@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ car.title }}{% endblock %}
+
+{% block body %}
+
+    <div class="col card text-white bg-primary m-3" style="max-width: 20rem;">
+            <div class="card-header">{{ car.title }}</div>
+            <div class="card-body">
+                <h4 class="card-title">{{ car.model }}</h4>
+                <p class="card-text">{{ car.description }}</p>
+                <p class="card-text">Release Year :{{ car.releaseYear|date('d/M/Y') }}</p>
+                <p class="card-text">Fuel : {{ car.fuel }}</p>
+                {% if car.drivingLicense==true %}
+                    <p>With driving license</p>
+                {% else %}
+                    <p>Without driving license</p>
+                {% endif %}
+            </div>
+    </div>
+{% endblock %}
