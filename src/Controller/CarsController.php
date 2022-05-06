@@ -36,8 +36,13 @@ class CarsController extends AbstractController
         $car = new Cars();
         $form = $this->createForm(CarsType::class, $car);
         $form->handleRequest($request);
-
+        $directory='./img/';
         if ($form->isSubmitted() && $form->isValid()) {
+            $file=$form->get("picture")->getData();
+            if($file){
+                $file->move($directory, $file->getClientOriginalName());
+                $car->setPicture($directory.$file->getClientOriginalName());
+            }
             $carsRepository->add($car);
             return $this->redirectToRoute('app_cars_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -40,6 +40,9 @@ class Cars
     #[ORM\Column(type: 'boolean')]
     private $drivingLicense;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $picture;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -149,6 +152,18 @@ class Cars
     public function setDrivingLicense(bool $drivingLicense): self
     {
         $this->drivingLicense = $drivingLicense;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
